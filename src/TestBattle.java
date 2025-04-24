@@ -12,3 +12,4 @@ public class TestBattle {
         manager.startBattle();
     }
 }
+
