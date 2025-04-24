@@ -26,6 +26,8 @@
  */
 
 
+
+
 public abstract class Character {
 	
 	//fields 
