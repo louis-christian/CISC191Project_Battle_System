@@ -7,6 +7,7 @@ public class PlayerCharacter extends Character {
     public PlayerCharacter(String name, int hp) {
         super(name, hp);
     }
+    
 
     // attacking, like with a sword or depending on the hero? maybe we add mages or archers later. 
     @Override

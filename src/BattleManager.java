@@ -18,6 +18,15 @@ public class BattleManager {
     public void startBattle() {
         System.out.println("Start battle");
 
+        player.goFirst();
+        enemy.goFirst();
+        
+        if (player.getInitiative() > enemy.getInitiative()) {
+        	System.out.println(player.getName() + " goes first!");
+        } else { 
+        	System.out.println(enemy.getName() + " goes first!");
+        }
+        
         while (player.getHp() > 0 && enemy.getHp() > 0) {
             displayStatus();
             playerTurn();
@@ -26,7 +35,6 @@ public class BattleManager {
                 enemy.decideAction(player);
             }
 
-    
         }
 
         displayOutcome();
@@ -34,8 +42,16 @@ public class BattleManager {
     }
 
     private void displayStatus() {
-        System.out.println("Player: " + player);
-        System.out.println("Enemy: " + enemy);
+    	if (player.getInitiative() >= enemy.getInitiative()) {
+    		System.out.println("Player: " + player);
+    		System.out.println("Enemy: " + enemy);
+    	} else {
+    		System.out.println("Enemy: " + enemy);
+    		System.out.println("Player: " + player);
+    	}
+    	
+        // System.out.println("Player: " + player);
+        // System.out.println("Enemy: " + enemy);
     }
 
     private void playerTurn() {

@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
 * Lead Author(s):
 * @author louis; student ID
@@ -33,7 +35,11 @@ public abstract class Character {
 	//fields 
     protected String name;
     protected int hp;
-    protected String status; 
+    protected String status;
+    protected int initiative; 
+    protected Random random = new Random();
+    
+
     
     // right now the statuses we have are "normal" and "defeated".
     // we should expand this later especially if we have more enemies later. 
@@ -44,6 +50,10 @@ public abstract class Character {
         this.hp = hp;
         this.status = "Normal";
     }
+    
+    public void goFirst() {
+    	initiative = random.nextInt(20);
+    }
 
     //basic actions
     public abstract void attack(Character target);
@@ -52,9 +62,12 @@ public abstract class Character {
 
     //taking damage
     public void takeDamage(int damage) {
+    	if (status == "Defending") {
+    		damage = 0;
+    	}
+    	
         hp -= damage;
         if (hp <= 0) {
-        	
             hp = 0;
             status = "Defeated";
             
@@ -62,7 +75,6 @@ public abstract class Character {
         
     }
     
-
     public String getName() {
         return name;
     
@@ -78,9 +90,20 @@ public abstract class Character {
     
     }
 
-    // maybe if we add some other statuses, like paralysis and poison?? 
-//    public void updateState() {
+    
+    public void updateState() {
+        if (hp <= 0) {
+            status = "Defeated";
+        } else if (status == "Defending") {
+            status = "Normal";
+        }
+    }
 
+
+    
+    public int getInitiative() {
+    	return initiative;
+    }
 
     @Override
     public String toString() {
